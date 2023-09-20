@@ -62,12 +62,6 @@ def Main():
     # root.mainloop()
 
     path = path_from_file()
-
-    # # inputs = handle_inputs()
-    # # inputs = {"x0": 377500, "x1": 377999, "y0": 570000, "y1": 5703001}
-    # inputs = {"x0": 0, "x1": 3.5, "y0": 1.5, "y1": 3.5}
-    # # xyz_files = get_xyz_files()
-
     xyz_files = xyz_files_from_dialog()
     df_to_save = process_files_poly(path, xyz_files)
     if not df_to_save.empty:
