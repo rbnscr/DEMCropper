@@ -1,17 +1,16 @@
+import warnings
+
+
 import pandas as pd
 from alive_progress import alive_bar
 import numpy as np
 
-import tkinter as tk
 import tkinter.filedialog as fd
 
 from matplotlib.path import Path
-import matplotlib as plt
 
-from matplotlib.backend_bases import key_press_handler
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
-from matplotlib.figure import Figure
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def process_files_poly(target_path: list, xyz_files: list):
 
@@ -32,6 +31,7 @@ def process_files_poly(target_path: list, xyz_files: list):
             else:
                 print(f"Matching coordinates found in file: {file}")
             bar()
+    print("Files processed.")
     return df_all
 
 
@@ -61,32 +61,16 @@ def path_file_cropper(path_file: np.ndarray) -> np.ndarray:
         pass
     return path_file
 
-
-def rerun_loop():
-    print("Re-run? (Y)")
-    decider = input().capitalize()
-    if decider == "Y":
-        Main()
-
 def xyz_files_from_dialog() -> list:
     files = fd.askopenfilenames(title='Choose xyz-file(s)')
     xyz_files = [file for file in files if file.endswith('.xyz')]
+    print("xyz-files loaded.")
     return xyz_files
 
 def path_from_file() -> list:
     path_file = fd.askopenfilename(title='Choose path-file')
     path_list = np.genfromtxt(path_file, delimiter=' ')
     path_list = path_file_cropper(path_list)
+    print("Path loaded.")
     return path_list 
 
-# def Main():
-#     # For CLI - tool
-#     path = path_from_file()
-#     xyz_files = xyz_files_from_dialog()
-#     df_to_save = process_files_poly(path, xyz_files)
-#     if not df_to_save.empty:
-#         save_xyz(df_to_save)
-
-
-# if __name__ == "__main__":
-#     Main()
