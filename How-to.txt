@@ -1,0 +1,59 @@
+---------- Installation -----------
+xyzMerge-Projekt-Dateien runterladen: https://github.com/rbnscr/xyzMerge -> Grüner Button "Code" -> Download ZIP
+ZIP an Wunschort entpacken
+
+python als User-Installation z.B. aus dem Microsoft Store oder python.org installieren. (Python 3.10 funktioniert auf jeden Fall, vermutlich aber auch alle Nachfolgeversionen.) -> Als Test kann im Terminal/Powershell der Befehl python ausgeführt werden. Sollte Python nicht installiert sein, öffnet sich der Microsoft Store. Ansonsten öffnet sich ein interaktiver Python-Interpreter, der auch die Version anzeigt. 
+
+Im Projekt-Order ausführen (dazu Rechtklick in den Ordner -> "In Terminal öffnen"):
+
+python -m venv .venv
+.venv\Scripts\activate (muss einmal pro Terminal-Session ausgeführt werden)
+
+Nach Aktivieren der virtuellen Umgebung sollte im Terminal (.venv) am Anfang jeder Zeile stehen. Darauf ist zu achten, weil sonst die Module in "requirements.txt" entweder in der globalen Python-Installation installiert werden (sehr blöd), oder nicht gefunden werden (auch blöd).
+
+python -m ensurepip --upgrade (pip ist ein Python-Tool, das die installierten Module verwaltet und ist standardmäßig installiert.)
+python -m pip install -r .\requirements.txt 
+
+
+
+------------ Ausführen ------------
+Im Projekt-Order ausführen:
+
+.venv\Scripts\activate (muss einmal pro Terminal-Session ausgeführt werden, siehe Anmerkung oben)
+python xyzMerge.py
+
+
+--------- Programmablauf ----------
+Zunächst muss _eine_ Pfad-Datei ausgewählt werden.
+
+In der Pfad-Datei befindet sich pro Zeile ein Stützpunkt [x y], 
+Dezimaltrennzeichen = "."
+Spaltentrennzeichen = " "
+
+(Hier könnte noch die Anpassung erfolgen, dass Pfade direkt mit dem Civil-Ausgabe-Format erkannt werden. Also Format: [p* x y z])
+Das Programm erstellt aus den angegebenen Stützpunkten einen Pfad und daraus ein Polygon.
+
+
+Dann _eine oder mehrere_ .xyz-Dateien auswählen.
+In den .xyz-Dateien befindet sich pro Zeile ein Punkt [x y z],
+Dezimaltrennzeichen = "."
+Spaltentrennzeichen = " "
+
+... Es wird gerechnet. Alle Punkte die innerhalb des Polygons liegen werden in einer Datei gesammelt ...
+
+Speicherort der neuen .xyz-Datei angeben. Format analog zu Eingangs-xyz-Datei.
+
+
+----------- Kompilieren -----------
+Der Code kann auch mithilfe von Nuitka zu einer .exe-Datei kompiliert werden.
+Dazu muss folgender Befehl ausgeführt werden:
+
+python -m nuitka xyzMerge.py
+
+Vermutlich muss man sich durch die Fehlermeldungen kämpfen. Zum Beispiel ist die GNU compiler collection (GCC) nicht standardmäßig installiert und spätestens an diesem Punkt wird wohl ein Admin-Passwort notwendig. Daher ist das eher etwas für den Gebrauch am heimischen Rechner, außer man möchte gewissen Menschen auf die Nerven gehen ;)
+
+Viel Spaß!
+
+
+Nuitka ist gerade nur bis Python 3.11 kompatibel. Es muss außerdem die neuste Version von Nuitka installiert werden:
+
