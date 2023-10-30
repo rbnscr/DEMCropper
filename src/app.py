@@ -24,18 +24,22 @@ def load_path():
     global app_path_file_contents
     app_path_file_contents = path_from_file()
     plot_path()
+    print("Pfad geladen.")
 
 def load_xyz_files():
     global app_xyz_files
     app_xyz_files = xyz_files_from_dialog()
+    print("XYZ-Dateien geladen.")
 
 def btn_process_files():
     global app_df_to_save
     app_df_to_save = process_files_poly(app_path_file_contents, app_xyz_files)
     plot_xyz_file()
+    print("XYZ-Dateien verarbeitet.")
 
 def btn_save_xyz():
     save_xyz(app_df_to_save)
+    print("Neue XYZ-Datei gespeichert.")
 
 # Buttons
 btn_load_path = ttk.Button(root, width="20", text = 'Load Path File',  command = lambda: load_path())
@@ -51,7 +55,7 @@ btn_process_polygon = ttk.Button(root, width="20", text = 'Start Computation', c
 # btn_process_polygon.grid(row = 2, column = 0, sticky="nws")
 
 
-btn_save_xyz = ttk.Button(root, width="20", text = 'Save xyz-File', command = lambda: btn_save_xyz())
+btn_saving_xyz = ttk.Button(root, width="20", text = 'Save xyz-File', command = lambda: btn_save_xyz())
 # btn_save_xyz.grid(row = 3, column = 0, sticky="nws")
 
 btn_plot_path = ttk.Button(root, width="20", text = 'Plot path', command = lambda: plot_path())
@@ -105,7 +109,7 @@ canvas.draw()
 btn_load_path.pack(side=tk.TOP, anchor=tk.NW)
 btn_load_xyz.pack(side=tk.TOP, anchor=tk.NW)
 btn_process_polygon.pack(side=tk.TOP, anchor=tk.NW)
-btn_save_xyz.pack(side=tk.TOP, anchor=tk.NW)
+btn_saving_xyz.pack(side=tk.TOP, anchor=tk.NW)
 
 
 # Run
