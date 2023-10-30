@@ -57,3 +57,6 @@ package.nls.*.json
 l10n/
 /.vscode
 /.vscode/
+src/__pycache__/lib.cpython-310.pyc
+.gitignore
+src/__pycache__/__init__.cpython-310.pyc
