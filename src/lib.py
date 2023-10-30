@@ -1,3 +1,6 @@
+import warnings
+
+
 import pandas as pd
 from alive_progress import alive_bar
 import numpy as np
@@ -12,6 +15,7 @@ from matplotlib.backend_bases import key_press_handler
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 from matplotlib.figure import Figure
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def process_files_poly(target_path: list, xyz_files: list):
 
@@ -62,11 +66,11 @@ def path_file_cropper(path_file: np.ndarray) -> np.ndarray:
     return path_file
 
 
-def rerun_loop():
-    print("Re-run? (Y)")
-    decider = input().capitalize()
-    if decider == "Y":
-        Main()
+# def rerun_loop():
+#     print("Re-run? (Y)")
+#     decider = input().capitalize()
+#     if decider == "Y":
+#         Main()
 
 def xyz_files_from_dialog() -> list:
     files = fd.askopenfilenames(title='Choose xyz-file(s)')
