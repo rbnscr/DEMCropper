@@ -5,11 +5,11 @@ def handle_args():
     parser = argparse.ArgumentParser(prog="DEMCropper",
                                      description="Crop xyz-files using a 2D path")
     parser.add_argument(
-        "--cli",
+        "-cli",
         dest="cli_flag",
-        type=bool,
         required=False,
         default=False,
+        action="store_true",
         help="Set to true to use the CLI instead of GUI (default: False)"
     )
     return parser.parse_args()
